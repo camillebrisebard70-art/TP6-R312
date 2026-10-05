@@ -1,0 +1,27 @@
+---
+export const prerender = false;
+
+import Layout from "../../layouts/Layout.astro";
+import PlotFigure from "../../components/PlotFigure.astro";
+import * as Plot from "@observablehq/plot";
+import penguins from "../../assets/penguins.json";
+
+const { species } = Astro.params;
+const filtered = penguins.filter((p) => p.species === species);
+---
+
+<Layout>
+  <h1>Penguins : {species}</h1>
+  <p>{filtered.length} penguin(s) trouvé(s)</p>
+  <PlotFigure
+    options={{
+      marks: [
+        Plot.dot(filtered, {
+          x: "culmen_length_mm",
+          y: "culmen_depth_mm",
+          stroke: "species",
+        }),
+      ],
+    }}
+  />
+</Layout>
