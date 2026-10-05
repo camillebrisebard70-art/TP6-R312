@@ -12,12 +12,13 @@ import "../styles/global.css";
     <title>Astro Basics</title>
   </head>
   <body>
-     <nav class="flex gap-4 p-4 border-b">
-      <a href="/">Accueil</a>
-      <a href="/penguins-onglets">Penguins (onglets)</a>
-      <a href="/rendu-dynamique">Penguins (dynamique)</a>
-      <a href="/rendu-statique">Penguins (statique)</a>
-      <a href="/cars">Voitures</a>
+   <nav class="flex gap-6 px-6 py-4 border-b bg-slate-900 text-white">
+      <a href="/" class="font-semibold hover:text-sky-400">Accueil</a>
+      <a href="/penguins-onglets" class="hover:text-sky-400">Penguins (onglets)</a>
+      <a href="/rendu-dynamique" class="hover:text-sky-400">Penguins (dynamique)</a>
+      <a href="/rendu-statique" class="hover:text-sky-400">Penguins (statique)</a>
+      <a href="/cars" class="hover:text-sky-400">Voitures (dynamique)</a>
+      <a href="/cars-statique" class="hover:text-sky-400">Voitures (statique)</a>
     </nav>
     <slot />
   </body>
