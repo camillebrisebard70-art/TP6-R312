@@ -1,0 +1,14 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import penguins from "../../assets/penguins.json";
+
+const species = [...new Set(penguins.map((p) => p.species))];
+---
+
+<Layout>
+  <ul>
+    {species.map((s) => (
+      <li><a href={`/rendu-statique/${s}`}>{s}</a></li>
+    ))}
+  </ul>
+</Layout>
