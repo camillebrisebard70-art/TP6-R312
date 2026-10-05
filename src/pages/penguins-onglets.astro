@@ -1,0 +1,47 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Tabs, TabsList, TabsTab, TabsPanel } from "accessible-astro-components";
+import * as Plot from "@observablehq/plot";
+import penguins from "../assets/penguins.json";
+
+const species = [...new Set(penguins.map((p) => p.species))];
+---
+
+<Layout>
+   <Tabs>
+    <TabsList>
+      {species.map((s, i) => (
+        <TabsTab id={`tab-${s}`} controls={`panel-${s}`} selected={i === 0}>{s}</TabsTab>
+      ))}
+    </TabsList>
+    {
+      species.map((s, i) => (
+        <TabsPanel id={`panel-${s}`} labelledby={`tab-${s}`} selected={i === 0}>
+          <div id={`plot-${s}`} />
+        </TabsPanel>
+      ))
+    }
+  </Tabs>
+</Layout>
+
+<script>
+  import * as Plot from "@observablehq/plot";
+  import penguins from "../assets/penguins.json";
+
+  const species = [...new Set(penguins.map((p) => p.species))];
+
+  species.forEach((s) => {
+    const div = document.querySelector(`#plot-${s}`) as HTMLDivElement;
+    const plot = Plot.plot({
+  width: 600,
+  height: 400,
+  marks: [
+        Plot.dot(
+          penguins.filter((p) => p.species === s),
+          { x: "culmen_length_mm", y: "culmen_depth_mm", stroke: "species" }
+        ),
+      ],
+    });
+    div?.append(plot);
+  });
+</script>
