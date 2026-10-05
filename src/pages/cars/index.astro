@@ -1,0 +1,14 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import cars from "../../assets/cars.json";
+
+const years = [...new Set(cars.map((c) => c.year))].sort();
+---
+
+<Layout>
+  <ul>
+    {years.map((y) => (
+      <li><a href={`/cars/${y}`}>Année : {y}</a></li>
+    ))}
+  </ul>
+</Layout>
